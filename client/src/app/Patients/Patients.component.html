@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      
+      
+
+    </div>
+    <div class="card-body">
+      <div class="card" *ngIf="showList()">
+        <div class="card-header">
+          <span class="title">List of patients</span>
+          <button class="btn btn-warning btn-sm" style="float: right;" (click)="addPatient()">Add Patient</button>
+        </div>
+        <div class="card-body">
+          <!--here is the table-->
+          <table class="table table-striped">
+            <tr>
+              <th>ID</th>
+              <th>Height</th>
+              <th>Weight</th>
+              <th>age</th>
+              <th></th>
+            </tr>
+            <tbody>
+            <tr *ngFor="let p of listOfPatients">
+              <th>{{p.id}}</th>
+              <th>{{p.height}}</th>
+              <th>{{p.weight}}</th>
+              <th>{{p.age}}</th>
+              <td><button (click)="showDetails(p.id)">Details</button></td>
+            </tr>
+          </tbody>
+          </table>
+        </div>
+        <div class="card-footer"></div>
+      </div>
+      <div class="card" *ngIf="!showList()">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card-header">
+           <span class="title">Patient details</span>
+          </div>
+          <div class="card-body">
+            <div class="row mb-2">
+              <div class="col-sm-6"><label>id</label></div>
+              <div class="col-sm-6">{{selectedPatient.id}}</div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-6"><label>weight</label></div>
+              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.weight" name="2"></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-6"><label>height</label></div>
+              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.height" name="3"></div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-sm-6"><label>age</label></div>
+              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.age" name="4"></div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <div class="row">
+              <div class="col-sm-6"> <button class="btn btn-primary btn-sm" (click)="goBack()">Back</button></div>
+              <div class="col-sm-1"> <button class="btn btn-warning btn-sm" (click)="update()">Update</button></div>
+            </div>
+           
+           
+          
+          </div>
+
+          </div>
+          <div class="col-sm-6">
+            <img src="../../assets/images/about.jpg" height="400px" weight="400px">
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <div class="card-footer">
+      Cardiac Software Developers(CSD) - 2024
+    </div>
+  </div>
+</div>

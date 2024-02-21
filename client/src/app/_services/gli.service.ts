@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { gli } from '../_models/gli';
+import { GLI } from '../_models/gli';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +9,10 @@ import { gli } from '../_models/gli';
 export class GliService {
   baseUrl: string = environment.apiUrl;
   constructor(private http: HttpClient) { }
-  getSpecificGli(id: number) { return this.http.get<gli>(this.baseUrl + id) }
+  getSpecificGli(id: number) { return this.http.get<GLI>(this.baseUrl + id) }
 
-  updateGli(p: gli) { return this.http.put<string>(this.baseUrl, p) }
+  updateGli(p: GLI) { return this.http.put<string>(this.baseUrl, p) }
 
-  addGli() { return this.http.post<gli>(this.baseUrl, null) }
+  addGli() { return this.http.post<GLI>(this.baseUrl, null) }
 
 }

@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { dropItem } from '../_models/dropItem';
 import { CasService } from '../_services/cas.service';
 import { GliService } from '../_services/gli.service';
+import { CAS } from '../_models/cas';
+import { GLI } from '../_models/gli';
 
 
 @Component({
@@ -19,8 +21,8 @@ export class PatientsComponent implements OnInit {
   listOfPatients: Array<Patient> = [];
   help: any;
   selectedPatient: Patient;
-  selectedCas: cas;
-  selectedGli: gli;
+  selectedCas: CAS;
+  selectedGli: GLI;
   
  
 

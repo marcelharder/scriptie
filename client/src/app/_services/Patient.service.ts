@@ -12,11 +12,11 @@ export class PatientService {
 
   getListOfPatients() {return this.http.get<Patient[]>(this.baseUrl + "getPatientList");}
 
-  getSpecificPatient(id: number){return this.http.get<Patient>(this.baseUrl + id)}
+  getSpecificPatient(id: number){return this.http.get<Patient>(this.baseUrl + "getSpecificPatient/" + id)}
 
-  updatePatient(p: Patient){return this.http.put<string>(this.baseUrl,p)}
+  updatePatient(p: Patient){return this.http.put<string>(this.baseUrl + "UpdatePatient",p)}
     
-  addPatient(){return this.http.post<Patient>(this.baseUrl, null)}
+  addPatient(){return this.http.post<Patient>(this.baseUrl + "AddPatient", null)}
 
 
 

@@ -47,14 +47,14 @@ export class PatientsComponent implements OnInit {
   addPatient(){
     this.toast.success("Patient added ...");
     this.p.addPatient().subscribe((next)=>{ this.selectedPatient = next; this.show = 1; });
-    this.g.addGli().subscribe((next)=>{this.selectedGli = next;});
-    this.c.addCas().subscribe((next)=>{this.selectedCas = next;})
+   // this.g.addGli().subscribe((next)=>{this.selectedGli = next;});
+   // this.c.addCas().subscribe((next)=>{this.selectedCas = next;})
   }
 
   update(){this.p.updatePatient(this.selectedPatient).subscribe((next)=>{
     // update the cas data
-    this.c.updateCas(this.selectedCas).subscribe((next)=>{});
-    this.g.updateGli(this.selectedGli).subscribe((next)=>{});
+   // this.c.updateCas(this.selectedCas).subscribe((next)=>{});
+   // this.g.updateGli(this.selectedGli).subscribe((next)=>{});
 
     // update the gli data
 
@@ -70,11 +70,12 @@ export class PatientsComponent implements OnInit {
 
   showDetails(id: number){
    this.p.getSpecificPatient(id).subscribe((next)=>{
+    debugger;
     this.selectedPatient = next;
     // get the cas data
-    this.c.getSpecificCas(id).subscribe((next)=>{this.selectedCas = next;})
+   // this.c.getSpecificCas(id).subscribe((next)=>{this.selectedCas = next;})
     // get the gli data
-    this.g.getSpecificGli(id).subscribe((next)=>{this.selectedGli = next;})
+   // this.g.getSpecificGli(id).subscribe((next)=>{this.selectedGli = next;})
 
     if(this.selectedPatient.gender === null){this.selectedPatient.gender = 0;}
     this.show = 1;

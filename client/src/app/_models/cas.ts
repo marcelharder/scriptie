@@ -3,8 +3,8 @@ export interface CAS{
     measured:number;
     predicted:number;
     zscore:number;
-    LLN:number;
-    ULN:number;
-    Perc_Predicted:number;
-    BDR_perc_changed:number;
+    lln:number;
+    uln:number;
+    perc_Predicted:number;
+    bdR_perc_changed:number;
 }

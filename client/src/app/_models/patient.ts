@@ -1,3 +1,6 @@
+import { CAS } from "./cas";
+import { GLI } from "./gli";
+
 export interface Patient {
     id: number;
     height: number;
@@ -10,4 +13,6 @@ export interface Patient {
     erv: number;
     ic: number;
     vc: number;
+    gli: GLI;
+    cas: CAS;
 }

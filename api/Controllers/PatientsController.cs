@@ -15,19 +15,31 @@ namespace scriptie.Controllers
         {
             _patient = patient;
         }
-        [HttpPost("api/")]
+        [HttpPost("api/AddPatient")]
         public async Task<IActionResult> addPatient()
         {
             var newPatient = new Patient();
             _patient.Add(newPatient);
+
             if (await _patient.SaveAll())
             {
+                var newCas = new CAS();
+                newCas.PatientId = newPatient.Id;
+                _patient.Add(newCas);
+                await _patient.SaveAll();
+
+                var newGli = new GLI();
+                newGli.PatientId = newPatient.Id;
+                _patient.Add(newGli);
+                await _patient.SaveAll();
+
+
                 return CreatedAtRoute("getPatient", new { id = newPatient.Id }, newPatient);
             };
             return BadRequest("cant add patient");
         }
         
-        [HttpGet("api/{id}", Name = "getPatient")]
+        [HttpGet("api/getSpecificPatient/{id}", Name = "getPatient")]
         public async Task<IActionResult> getPatient(int id)
         {
             return Ok(await _patient.getSpecificPatient(id));
@@ -38,7 +50,7 @@ namespace scriptie.Controllers
             return Ok( await _patient.getListOfPatients());
         }
         
-        [HttpPut("api/")]
+        [HttpPut("api/UpdatePatient")]
         public async Task<IActionResult> updatePatient([FromBody] Patient pat){
              _patient.Update(pat);
              if(await _patient.SaveAll()){return Ok();} else {return BadRequest("");}

@@ -19,6 +19,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace scriptie
 {
@@ -40,6 +42,7 @@ namespace scriptie
             services.AddScoped<IPatient, PatientRepo>();
             services.AddScoped<IStatistics, Statistics>();
 
+           services.AddMvc().AddNewtonsoftJson(o => o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
             services.AddDbContext<DataContext>(opt =>
             {

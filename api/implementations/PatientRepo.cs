@@ -38,7 +38,10 @@ namespace api.implementations
 
         public async Task<Patient> getSpecificPatient(int Id)
         {
-            var help = await _context.Patients.FirstOrDefaultAsync(p => p.Id == Id);
+            var help = await _context.Patients
+            .Include(cas => cas.CAS)
+            .Include(gli => gli.GLI)
+            .FirstOrDefaultAsync(p => p.Id == Id);
             return help;
         }
 

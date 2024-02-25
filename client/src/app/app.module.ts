@@ -20,6 +20,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ToastrModule } from 'ngx-toastr';
 import { ChartsModule } from 'ng2-charts';
 import { StatisticsOneComponent } from './Statistics/statisticsOne/statisticsOne.component';
+import { StatisticsTwoComponent } from './Statistics/statisticsTwo/statisticsTwo.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 export function tokenGet() { return localStorage.getItem('token'); }
 
@@ -31,10 +33,12 @@ export function tokenGet() { return localStorage.getItem('token'); }
       PatientsComponent,
       StatisticsComponent,
       AboutComponent,
-      StatisticsOneComponent
+      StatisticsOneComponent,
+      StatisticsTwoComponent
    ],
   imports: [
     FormsModule,
+    TabsModule.forRoot(),
     ChartsModule,
     BrowserModule,
     ToastrModule.forRoot({

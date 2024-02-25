@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-statisticsOne',
-  templateUrl: './statisticsOne.component.html',
-  styleUrls: ['./statisticsOne.component.css']
+  selector: 'app-statisticsTwo',
+  templateUrl: './statisticsTwo.component.html',
+  styleUrls: ['./statisticsTwo.component.css']
 })
-export class StatisticsOneComponent implements OnInit {
+export class StatisticsTwoComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
   }
-
   chartLabels = [
     '1',
     '2',
@@ -38,5 +37,6 @@ export class StatisticsOneComponent implements OnInit {
     }
    
   ];
+
 
 }

@@ -7,6 +7,7 @@ import { CAS } from '../_models/cas';
   providedIn: 'root'
 })
 export class CasService {
+  
   baseUrl: string = environment.apiUrl;
   constructor(private http: HttpClient) { }
   getSpecificCas(id: number) { return this.http.get<CAS>(this.baseUrl + id) }
@@ -14,5 +15,7 @@ export class CasService {
   updateCas(p: CAS) { return this.http.put<string>(this.baseUrl, p) }
 
   addCas() { return this.http.post<CAS>(this.baseUrl, null) }
+
+  calculateCas(id: number) {  return this.http.get<CAS>(this.baseUrl + "calculateCAS/" + id) }
 
 }

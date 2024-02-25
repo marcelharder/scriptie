@@ -7,6 +7,7 @@ import { GLI } from '../_models/gli';
   providedIn: 'root'
 })
 export class GliService {
+ 
   baseUrl: string = environment.apiUrl;
   constructor(private http: HttpClient) { }
   getSpecificGli(id: number) { return this.http.get<GLI>(this.baseUrl + id) }
@@ -14,5 +15,7 @@ export class GliService {
   updateGli(p: GLI) { return this.http.put<string>(this.baseUrl, p) }
 
   addGli() { return this.http.post<GLI>(this.baseUrl, null) }
+
+  calculateGli(id: number) {  return this.http.get<GLI>(this.baseUrl + "calculateGli/" + id) }
 
 }

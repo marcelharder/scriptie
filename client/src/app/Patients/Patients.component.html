@@ -67,33 +67,39 @@
             </div>
             <div class="row mb-2">
               <div class="col-sm-6"><label>FEV1</label></div>
-              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.feV1" name="34"></div>
+              <div class="col-sm-4"><input type=text class=form-control [(ngModel)]="selectedPatient.feV1" name="34"></div>
+              <div class="col-sm-2"><button class="btn btn-warning btn-sm float right" (click)="calcButton(1)">FEV1</button></div>
             </div>
             <div class="row mb-2">
               <div class="col-sm-6"><label>TLC</label></div>
-              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.tlc" name="39"></div>
+              <div class="col-sm-4"><input type=text class=form-control [(ngModel)]="selectedPatient.tlc" name="39"></div>
+              <div class="col-sm-2"><button class="btn btn-warning btn-sm float right" (click)="calcButton(2)">TLC</button></div>
             </div>
             <div class="row mb-2">
               <div class="col-sm-6"><label>RV</label></div>
-              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.rv" name="35"></div>
+              <div class="col-sm-4"><input type=text class=form-control [(ngModel)]="selectedPatient.rv" name="35"></div>
+              <div class="col-sm-2"><button class="btn btn-warning btn-sm float right" (click)="calcButton(3)">RV</button></div>
             </div>
             <div class="row mb-2">
               <div class="col-sm-6"><label>ERV</label></div>
-              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.erv" name="36"></div>
+              <div class="col-sm-4"><input type=text class=form-control [(ngModel)]="selectedPatient.erv" name="36"></div>
+              <div class="col-sm-2"><button class="btn btn-warning btn-sm float right" (click)="calcButton(4)">ERV</button></div>
             </div>
             <div class="row mb-2">
               <div class="col-sm-6"><label>IC</label></div>
-              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.ic" name="37"></div>
+              <div class="col-sm-4"><input type=text class=form-control [(ngModel)]="selectedPatient.ic" name="37"></div>
+              <div class="col-sm-2"><button class="btn btn-warning btn-sm float right" (click)="calcButton(5)">IC</button></div>
             </div>
             <div class="row mb-2">
               <div class="col-sm-6"><label>VC</label></div>
-              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.vc" name="38"></div>
+              <div class="col-sm-4"><input type=text class=form-control [(ngModel)]="selectedPatient.vc" name="38"></div>
+              <div class="col-sm-2"><button class="btn btn-warning btn-sm float right" (click)="calcButton(6)">VC</button></div>
             </div>
           </div>
           <div class="card-footer">
             <div class="row">
               <div class="col-sm-6"> <button class="btn btn-primary btn-sm" (click)="goBack()">Back</button></div>
-              <div class="col-sm-1"> <button class="btn btn-warning btn-sm" (click)="update()">Update</button></div>
+              <div class="col-sm-1"> <button class="btn btn-success btn-sm" (click)="update()">Update</button></div>
             </div>
            
            
@@ -105,7 +111,7 @@
             <div class="row mt-5">
               <div class="col-sm-6">
                 <div class="card">
-                  <div class="header">CAS prediction</div>
+                  <div class="header">CAS prediction for {{cas_title}}</div>
                   <div class="card-body">
                     <div class="row mb-2">
                       <div class="col-sm-6"><label>Measured</label></div>
@@ -140,7 +146,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="card">
-                  <div class="header">GLI prediction</div>
+                  <div class="header">GLI prediction for {{gli_title}}</div>
                   <div class="card-body">
                     <div class="row mb-2">
                       <div class="col-sm-6"><label>Measured</label></div>

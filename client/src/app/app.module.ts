@@ -18,6 +18,8 @@ import { PatientService } from './_services/Patient.service';
 import { ListPatientsResolver } from './_resolvers/ListPatientsResolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { ToastrModule } from 'ngx-toastr';
+import { ChartsModule } from 'ng2-charts';
+import { StatisticsOneComponent } from './Statistics/statisticsOne/statisticsOne.component';
 
 export function tokenGet() { return localStorage.getItem('token'); }
 
@@ -28,10 +30,12 @@ export function tokenGet() { return localStorage.getItem('token'); }
       HomeComponent,
       PatientsComponent,
       StatisticsComponent,
-      AboutComponent
+      AboutComponent,
+      StatisticsOneComponent
    ],
   imports: [
     FormsModule,
+    ChartsModule,
     BrowserModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'

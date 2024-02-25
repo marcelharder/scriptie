@@ -16,6 +16,8 @@ export class PatientsComponent implements OnInit {
   genderOptions: Array<dropItem> = [];
   cas_title = '';
   gli_title = '';
+  casId =0;
+  gliId =0;
   show = 0;
   listOfPatients: Array<Patient> = [];
   help: any;
@@ -171,11 +173,45 @@ export class PatientsComponent implements OnInit {
     this.toast.success('Patient added ...');
     this.p.addPatient().subscribe((next) => {
       this.selectedPatient = next;
+      this.casId = this.selectedPatient.cas.casId;
+      this.gliId = this.selectedPatient.gli.gliId;
       this.show = 1;
     });
   }
 
   update() {
+    var newCas:CAS = {
+      casId: 0,
+      PatientId:0,
+      measured: 0,
+      predicted: 0,
+      zscore: 0,
+      lln: 0,
+      uln: 0,
+      perc_Predicted: 0,
+      bdR_perc_changed: 0
+    };
+    var newGli:GLI = {
+      gliId: 0,
+      PatientId:0,
+      measured: 0,
+      predicted: 0,
+      zscore: 0,
+      lln: 0,
+      uln: 0,
+      perc_Predicted: 0,
+      bdR_perc_changed: 0
+    };
+// restore the CAS and GLI first
+    newGli.PatientId = this.selectedPatient.id;
+    newCas.PatientId = this.selectedPatient.id;
+    newCas.casId = this.casId;
+    newGli.gliId = this.gliId;
+    this.selectedPatient.cas = newCas;
+    this.selectedPatient.gli = newGli;
+
+    debugger;
+
     this.p.updatePatient(this.selectedPatient).subscribe((next) => {
       // get the list again
       this.p.getListOfPatients().subscribe(
@@ -201,6 +237,9 @@ export class PatientsComponent implements OnInit {
   showDetails(id: number) {
     this.p.getSpecificPatient(id).subscribe((next) => {
       this.selectedPatient = next;
+      this.casId = this.selectedPatient.cas.casId;
+      this.gliId = this.selectedPatient.gli.gliId;
+      debugger;
       this.clearTheResults();
 
       if (this.selectedPatient.gender === null || this.selectedPatient.gender === "") {

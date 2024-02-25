@@ -1,5 +1,6 @@
 export interface CAS{
-    CasId:number;
+    casId:number;
+    PatientId: number;
     measured:number;
     predicted:number;
     zscore:number;

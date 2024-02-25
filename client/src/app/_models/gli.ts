@@ -1,5 +1,6 @@
 export interface GLI{
-    GliId:number;
+    gliId:number;
+    PatientId:number;
     measured:number;
     predicted:number;
     zscore:number;

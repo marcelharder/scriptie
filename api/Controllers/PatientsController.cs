@@ -27,13 +27,17 @@ namespace scriptie.Controllers
 
             if (await _patient.SaveAll())
             {
-                var newCas = new CAS();
-                newCas.PatientId = newPatient.Id;
+                var newCas = new CAS
+                {
+                    PatientId = newPatient.Id
+                };
                 _patient.Add(newCas);
                 await _patient.SaveAll();
 
-                var newGli = new GLI();
-                newGli.PatientId = newPatient.Id;
+                var newGli = new GLI
+                {
+                    PatientId = newPatient.Id
+                };
                 _patient.Add(newGli);
                 await _patient.SaveAll();
 
@@ -58,6 +62,7 @@ namespace scriptie.Controllers
         [HttpPut("api/UpdatePatient")]
         public async Task<IActionResult> updatePatient([FromBody] Patient pat)
         {
+            
             _patient.Update(pat);
             if (await _patient.SaveAll()) { return Ok(); } else { return BadRequest(""); }
         }

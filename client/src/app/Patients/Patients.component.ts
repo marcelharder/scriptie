@@ -4,8 +4,6 @@ import { Patient } from '../_models/patient';
 import { PatientService } from '../_services/Patient.service';
 import { ToastrService } from 'ngx-toastr';
 import { dropItem } from '../_models/dropItem';
-import { CasService } from '../_services/cas.service';
-import { GliService } from '../_services/gli.service';
 import { CAS } from '../_models/cas';
 import { GLI } from '../_models/gli';
 
@@ -28,8 +26,6 @@ export class PatientsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private p: PatientService,
-    private c: CasService,
-    private g: GliService,
     private toast: ToastrService
   ) {}
 
@@ -78,8 +74,8 @@ export class PatientsComponent implements OnInit {
           this.toast.error('FEV1 cannot be empty ...');
           this.clearTheResults();
         } else {
-          this.calculateGli(id);
-          this.calculateCas(id);
+          this.calculateGli(id, this.selectedPatient.feV1);
+          this.calculateCas(id, this.selectedPatient.feV1);
         }
         break;
       case 2:
@@ -91,8 +87,8 @@ export class PatientsComponent implements OnInit {
           this.toast.error('TLC cannot be empty ...');
           this.clearTheResults();
         } else {
-          this.calculateGli(id);
-          this.calculateCas(id);
+          this.calculateGli(id, this.selectedPatient.tlc);
+          this.calculateCas(id, this.selectedPatient.tlc);
         }
 
         break;
@@ -105,8 +101,8 @@ export class PatientsComponent implements OnInit {
           this.toast.error('RV cannot be empty ...');
           this.clearTheResults();
         } else {
-          this.calculateGli(id);
-          this.calculateCas(id);
+          this.calculateGli(id, this.selectedPatient.rv);
+          this.calculateCas(id, this.selectedPatient.rv);
         }
 
         break;
@@ -119,8 +115,8 @@ export class PatientsComponent implements OnInit {
           this.toast.error('ERV cannot be empty ...');
           this.clearTheResults();
         } else {
-          this.calculateGli(id);
-          this.calculateCas(id);
+          this.calculateGli(id, this.selectedPatient.erv);
+          this.calculateCas(id, this.selectedPatient.erv);
         }
 
         break;
@@ -133,8 +129,8 @@ export class PatientsComponent implements OnInit {
           this.toast.error('IC cannot be empty ...');
           this.clearTheResults();
         } else {
-          this.calculateGli(id);
-          this.calculateCas(id);
+          this.calculateGli(id, this.selectedPatient.ic);
+          this.calculateCas(id, this.selectedPatient.ic);
         }
 
         break;
@@ -147,22 +143,22 @@ export class PatientsComponent implements OnInit {
           this.toast.error('VC cannot be empty ...');
           this.clearTheResults();
         } else {
-          this.calculateGli(id);
-          this.calculateCas(id);
+          this.calculateGli(id, this.selectedPatient.vc);
+          this.calculateCas(id, this.selectedPatient.vc);
         }
 
         break;
     }
   }
 
-  calculateGli(id: number) {
-    this.g.calculateGli(id).subscribe((next) => {
+  calculateGli(id: number, value: string) {
+    this.p.calculateGli(id,value).subscribe((next) => {
       this.selectedPatient.gli = next;
     });
   }
 
-  calculateCas(id: number) {
-    this.c.calculateCas(id).subscribe((next) => {
+  calculateCas(id: number, value: string) {
+    this.p.calculateCas(id,value).subscribe((next) => {
       this.selectedPatient.cas = next;
     });
   }
@@ -207,8 +203,8 @@ export class PatientsComponent implements OnInit {
       this.selectedPatient = next;
       this.clearTheResults();
 
-      if (this.selectedPatient.gender === null) {
-        this.selectedPatient.gender = "1";
+      if (this.selectedPatient.gender === null || this.selectedPatient.gender === "") {
+        this.selectedPatient.gender = "Choose";
       }
       this.show = 1;
     });

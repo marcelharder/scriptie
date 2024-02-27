@@ -1,10 +1,5 @@
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using api.entities;
-using api.Interfaces;
+namespace api.implementations;
 
-namespace api.implementations
-{
     public class Statistics : IStatistics
     {
         public async Task<CAS> CalculateCASBDR(string value)
@@ -255,4 +250,3 @@ namespace api.implementations
             return result;
         }
     }
-}

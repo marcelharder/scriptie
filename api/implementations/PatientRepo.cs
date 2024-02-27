@@ -1,13 +1,5 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using api.data;
-using api.entities;
-using api.Interfaces;
-using Microsoft.EntityFrameworkCore;
+namespace api.implementations;
 
-namespace api.implementations
-{
     public class PatientRepo : IPatient
     {
         private DataContext _context;
@@ -55,4 +47,3 @@ namespace api.implementations
              _context.Update(entity);
         }
     }
-}

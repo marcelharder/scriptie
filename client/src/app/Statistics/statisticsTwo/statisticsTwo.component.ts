@@ -22,17 +22,15 @@ export class StatisticsTwoComponent implements OnInit {
     '8',
   ];
 
-  chartOptions = {
-    responsive: true
-  };
+  chartOptions = { responsive: true };
 
   chartData = [
     {
-      data: [330, 600, 260, 700,330, 600, 260, 700],
+      data: [33, 60, 26, 70, 33, 60, 26, 70],
       label: 'Coal and Steel'
     },
     {
-      data: [120, 455, 100, 340,120, 455, 100, 340],
+      data: [12, 45, 15, 34, 12, 45, 20, 34],
       label: 'Global Initiative'
     }
    

@@ -29,11 +29,11 @@ export class StatisticsOneComponent implements OnInit {
 
   chartData = [
     {
-      data: [330, 600, 260, 700,330, 600, 260, 700],
+      data: [330, 600, 260, 700, 330, 600, 260, 700],
       label: 'Coal and Steel'
     },
     {
-      data: [120, 455, 100, 340,120, 455, 100, 340],
+      data: [120, 455, 100, 340, 120, 455, 100, 340],
       label: 'Global Initiative'
     }
    

@@ -22,6 +22,8 @@ import { ChartsModule } from 'ng2-charts';
 import { StatisticsOneComponent } from './Statistics/statisticsOne/statisticsOne.component';
 import { StatisticsTwoComponent } from './Statistics/statisticsTwo/statisticsTwo.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { DescriptiveStatisticsComponent } from './Statistics/descriptiveStatistics/descriptiveStatistics.component';
+import { DummyComponent } from './Statistics/dummy/dummy.component';
 
 export function tokenGet() { return localStorage.getItem('token'); }
 
@@ -34,7 +36,9 @@ export function tokenGet() { return localStorage.getItem('token'); }
       StatisticsComponent,
       AboutComponent,
       StatisticsOneComponent,
-      StatisticsTwoComponent
+      StatisticsTwoComponent,
+      DescriptiveStatisticsComponent,
+      DummyComponent
    ],
   imports: [
     FormsModule,

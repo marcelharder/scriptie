@@ -35,10 +35,6 @@ export class StatisticsComponent implements OnInit {
   selectSeven(){if(this.graphSelector === 7){return true;} else {return false;}}
 
 
-  selectionChanged(){
-    this.toast.info(this.selectedGraph.toString());
-    this.graphSelector = this.selectedGraph;
-
-  }
+  selectionChanged(){this.graphSelector = +this.selectedGraph;}
 
 }

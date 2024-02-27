@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -13,7 +14,7 @@ export class NavComponent implements OnInit {
   model: any = {};
   loginFailed = false;
 
-  constructor(public auth: AuthService, private toast:ToastrService) { }
+  constructor(public auth: AuthService, private toast:ToastrService,private router:Router) { }
 
   ngOnInit() {
     this.auth.currentUser$.subscribe((next)=>{
@@ -24,6 +25,7 @@ export class NavComponent implements OnInit {
   logOut() {
     this.toast.info("Logged out ...");
     this.auth.logOut();
+    this.router.navigate(['/']);
   }
 
   login() {

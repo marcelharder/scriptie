@@ -1,52 +1,45 @@
 <div class="container">
-
   <div>
     <tabset>
-      <tab heading="Graphs" id="tab1"><div class="card">
-        <div class="card-header">
-          <div class="d-flex justify-content-center">
-            <h2><span class="lbl lbl-secondary">Select your graph</span></h2>
+      <tab heading="Graphs" id="tab1">
+        <div class="card">
+          <div class="card-header">
+            <div class="d-flex justify-content-center">
+              <h2><span class="lbl lbl-secondary">Select your graph</span></h2>
+            </div>
           </div>
-          
-        </div>
-        <div class="card-body">
-          <div class="row"  style="height:400px">
-            <div class="col-sm-6">
-              <select [(ngModel)]="selectedGraph" name="name" class="form-control" (change)="selectionChanged()">
-              <option *ngFor="let an of arrayOfGraphs" [value]=an.value>{{ an.description }}
-              </option>
-          </select></div>
-            <div class="col-sm-6" *ngIf="selectOne()" id="chart-wrapper"><app-statisticsOne></app-statisticsOne></div>
-            <div class="col-sm-6" *ngIf="selectTwo()" id="chart-wrapper"><app-statisticsTwo></app-statisticsTwo></div>
-    
-    
-    
-    
-    
+          <div class="card-body">
+            <div class="row" style="height: 400px">
+              <div class="col-sm-6">
+                <select [(ngModel)]="selectedGraph" name="name" class="form-control" (change)="selectionChanged()">
+                  <option *ngFor="let an of arrayOfGraphs" [value]="an.value">
+                    {{ an.description }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-sm-6" *ngIf="selectOne()" id="chart-wrapper"> <app-statisticsOne></app-statisticsOne>
+              </div>
+              <div class="col-sm-6" *ngIf="selectTwo()" id="chart-wrapper"> <app-statisticsTwo></app-statisticsTwo>
+              </div>
+              <div class="col-sm-6" *ngIf="selectThree()" id="chart-wrapper"> <app-dummy></app-dummy> </div>
+              <div class="col-sm-6" *ngIf="selectFour()" id="chart-wrapper"> <app-dummy></app-dummy> </div>
+              <div class="col-sm-6" *ngIf="selectFive()" id="chart-wrapper"> <app-dummy></app-dummy> </div>
+              <div class="col-sm-6" *ngIf="selectSix()" id="chart-wrapper"> <app-dummy></app-dummy> </div>
+              <div class="col-sm-6" *ngIf="selectSeven()" id="chart-wrapper"> <app-dummy></app-dummy> </div>
+            </div>
           </div>
+          <div class="card-footer">Cardiac Software Developers(CSD) - 2024</div>
         </div>
-        <div class="card-footer">
-          Cardiac Software Developers(CSD) - 2024
-        </div>
-      </div></tab>
+      </tab>
       <tab heading="Descriptive Statistics">
         <div class="card">
           <div class="card-header"></div>
           <div class="card-body">
-            
+            <app-descriptiveStatistics></app-descriptiveStatistics>
           </div>
-          <div class="card-footer"></div>
+          <div class="card-footer">Cardiac Software Developers(CSD) - 2024</div>
         </div>
       </tab>
-     
     </tabset>
   </div>
-
-
-
-
-
-
-  
-  
 </div>

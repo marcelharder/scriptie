@@ -3,7 +3,7 @@ version: '3.1'
 services: 
 
   scriptie:
-    image: scriptie:v07
+    image: scriptie:v08
     restart: always
     ports:
       - 8048:80

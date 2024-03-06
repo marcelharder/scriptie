@@ -210,7 +210,6 @@ export class PatientsComponent implements OnInit {
     this.selectedPatient.cas = newCas;
     this.selectedPatient.gli = newGli;
 
-    debugger;
 
     this.p.updatePatient(this.selectedPatient).subscribe((next) => {
       // get the list again
@@ -239,7 +238,7 @@ export class PatientsComponent implements OnInit {
       this.selectedPatient = next;
       this.casId = this.selectedPatient.cas.casId;
       this.gliId = this.selectedPatient.gli.gliId;
-      debugger;
+     
       this.clearTheResults();
 
       if (this.selectedPatient.gender === null || this.selectedPatient.gender === "") {

@@ -1,10 +1,13 @@
 using System.Threading.Tasks;
+using api.data.dtos;
 using api.entities;
 
 namespace api.Interfaces
 {
     public interface IStatistics
     {
+
+        Task<StatisticalSummaryForReturnDTO> getDescriptiveStatistics();
         Task<CAS> CalculateCASFEV1(string value);
         Task<CAS> CalculateCASTLC(string value);
         Task<CAS> CalculateCASRV(string value);

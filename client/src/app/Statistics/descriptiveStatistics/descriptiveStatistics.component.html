@@ -11,13 +11,13 @@
       <div class="col-sm-4">
         <h4><span>Mean Age and SD:</span></h4>
       </div>
-      <div class="col-sm-8">{{test.meanAge}} -/+ {{test.meanAgeSTD}}</div>
+      <div class="col-sm-8">{{test.meanAge | number: '2.0-1' }} -/+ {{test.meanAgeSTD | number: '2.0-1' }}</div>
     </div>
     <div class="row">
       <div class="col-sm-4">
         <h4><span>Mean Height and SD:</span></h4>
       </div>
-      <div class="col-sm-8">{{test.meanHeight}} -/+ {{test.meanHeightSTD}}</div>
+      <div class="col-sm-8">{{test.meanHeight | number: '2.0-1' }} -/+ {{test.meanHeightSTD | number: '2.0-1' }}</div>
     </div>
     <div class="row">
       <div class="col-sm-4">

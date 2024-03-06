@@ -17,6 +17,9 @@ export class DescriptiveStatisticsComponent implements OnInit {
   }
 
   getStatisticalSummary() {
-    this.statis.getSummary().subscribe((next) => { this.test = next; });
+    this.statis.getSummary().subscribe((next) => {
+      this.test = next;
+      
+    });
   }
 }

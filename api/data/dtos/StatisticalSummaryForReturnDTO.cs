@@ -4,10 +4,10 @@ namespace api.data.dtos;
     {
 
         public int numberOfCases { get; set; }
-  public int meanAge { get; set; }
-  public int meanAgeSTD { get; set; }
-  public int meanHeight { get; set; }
-  public int meanHeightSTD{ get; set; }
+  public double meanAge { get; set; }
+  public double meanAgeSTD { get; set; }
+  public double meanHeight { get; set; }
+  public double meanHeightSTD{ get; set; }
   public int genderMale { get; set; }
   public int genderFemale { get; set; }
 

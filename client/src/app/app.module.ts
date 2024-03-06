@@ -18,12 +18,12 @@ import { PatientService } from './_services/Patient.service';
 import { ListPatientsResolver } from './_resolvers/ListPatientsResolver';
 import { AuthGuard } from './_guards/auth.guard';
 import { ToastrModule } from 'ngx-toastr';
-import { ChartsModule } from 'ng2-charts';
 import { StatisticsOneComponent } from './Statistics/statisticsOne/statisticsOne.component';
 import { StatisticsTwoComponent } from './Statistics/statisticsTwo/statisticsTwo.component';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { DescriptiveStatisticsComponent } from './Statistics/descriptiveStatistics/descriptiveStatistics.component';
 import { DummyComponent } from './Statistics/dummy/dummy.component';
+import { StatisticsThreeComponent } from './Statistics/statistics-three/statistics-three.component';
 
 export function tokenGet() { return localStorage.getItem('token'); }
 
@@ -38,12 +38,12 @@ export function tokenGet() { return localStorage.getItem('token'); }
       StatisticsOneComponent,
       StatisticsTwoComponent,
       DescriptiveStatisticsComponent,
-      DummyComponent
+      DummyComponent,
+      StatisticsThreeComponent
    ],
   imports: [
     FormsModule,
     TabsModule.forRoot(),
-    ChartsModule,
     BrowserModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right'

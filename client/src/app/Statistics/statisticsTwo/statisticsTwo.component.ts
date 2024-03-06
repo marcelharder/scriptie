@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Chart } from 'chart.js/auto';
 
 @Component({
   selector: 'app-statisticsTwo',
@@ -6,35 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./statisticsTwo.component.css']
 })
 export class StatisticsTwoComponent implements OnInit {
-
+  lineChart: Chart<"line", { January: number; February: number; }, unknown>;
+ 
+  
   constructor() { }
 
   ngOnInit() {
+    this.lineChart = new Chart('stat02',{
+      type: 'line',
+      data:{
+        datasets: [{
+          label:'Included patients',
+          data:{January: 10, February:20,March: 30, April: 8,May: 15, June:34,July: 8, August:7,September: 20, October:30,November: 25, December:6,},
+          fill: false,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.5
+        }]
+      }
+    });
   }
-  chartLabels = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-  ];
-
-  chartOptions = { responsive: true };
-
-  chartData = [
-    {
-      data: [33, 60, 26, 70, 33, 60, 26, 70],
-      label: 'Coal and Steel'
-    },
-    {
-      data: [12, 45, 15, 34, 12, 45, 20, 34],
-      label: 'Global Initiative'
-    }
-   
-  ];
-
+  
 
 }

@@ -5,48 +5,42 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 Chart.register(annotationPlugin);
 
 @Component({
-  selector: 'app-statisticsOne',
-  templateUrl: './statisticsOne.component.html',
-  styleUrls: ['./statisticsOne.component.css'],
+  selector: 'app-statistics-three',
+  templateUrl: './statistics-three.component.html',
+  styleUrls: ['./statistics-three.component.css'],
 })
-export class StatisticsOneComponent implements OnInit {
-  barChart: Chart<'bar', any, unknown>;
-  lijnhoogte1 = 12;
-  lijnhoogte2 = 22;
-
+export class StatisticsThreeComponent implements OnInit {
+  scatterChart: Chart<'scatter', { x: number; y: number }[], unknown>;
+  lijnhoogte1 = 5;
+  lijnhoogte2 = 8;
 
   constructor() {}
 
-  ngOnInit() {
-    var typescriptData: any = [
-      { key: 'Marcel', value: 10 },
-      { key: 'Pim', value: 15 },
-      { key: 'Mieke', value: 20 },
-    ];
+  ngOnInit(): void {
 
-
-
-    /*  const d: ChartData <'bar',{key: string, value: number} []> = {
-      datasets:[{
-        data: typescriptData,
-        parsing: {
-          xAxisKey: 'key',
-          yAxisKey: 'value'
-        }
-      }]
-    }; */
-
-    this.barChart = new Chart('stat01', {
-      type: 'bar',
+    
+    this.scatterChart = new Chart('stat03', {
+      type: 'scatter',
       data: {
         datasets: [
           {
-            label:'Test',
-            data: typescriptData,
-            parsing: {
-              xAxisKey: 'key',
-              yAxisKey: 'value',
-            },
+            label: 'Scatter Dataset',
+            pointBackgroundColor: [
+              'yellow',
+              'blue',
+              'red',
+              'green',
+              'orange',
+              'indigo',
+            ],
+            data: [
+              { x: -10, y: 0 },
+              { x: 0, y: 10 },
+              { x: 3, y: 8 },
+              { x: 1, y: 4 },
+              { x: 9, y: 1 },
+              { x: -1, y: 5 },
+            ],
           },
         ],
       },

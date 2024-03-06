@@ -24,6 +24,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { DescriptiveStatisticsComponent } from './Statistics/descriptiveStatistics/descriptiveStatistics.component';
 import { DummyComponent } from './Statistics/dummy/dummy.component';
 import { StatisticsThreeComponent } from './Statistics/statistics-three/statistics-three.component';
+import { StatisticsService } from './_services/statistics.service';
 
 export function tokenGet() { return localStorage.getItem('token'); }
 
@@ -58,7 +59,7 @@ export function tokenGet() { return localStorage.getItem('token'); }
       }
   }),
   ],
-  providers: [AuthService,PatientService,ListPatientsResolver,AuthGuard],
+  providers: [AuthService,PatientService,ListPatientsResolver,AuthGuard, StatisticsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

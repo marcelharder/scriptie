@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { dropItem } from '../_models/dropItem';
 import { ToastrService } from 'ngx-toastr';
+import { StatisticsService } from '../_services/statistics.service';
 
 @Component({
   selector: 'app-Statistics',
@@ -22,7 +23,9 @@ export class StatisticsComponent implements OnInit {
     this.arrayOfGraphs.push({value:4, description: "ERV"})
     this.arrayOfGraphs.push({value:5, description: "LLN"})
     this.arrayOfGraphs.push({value:6, description: "ULN"})
-    this.arrayOfGraphs.push({value:7, description: "zscore"})
+    this.arrayOfGraphs.push({value:7, description: "zscore"});
+
+    
 
   }
 
@@ -36,5 +39,7 @@ export class StatisticsComponent implements OnInit {
 
 
   selectionChanged(){this.graphSelector = +this.selectedGraph;}
+
+  
 
 }

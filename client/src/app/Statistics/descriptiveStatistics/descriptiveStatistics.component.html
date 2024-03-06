@@ -5,19 +5,25 @@
       <div class="col-sm-4">
         <h4><span>Enrolled patients:</span></h4>
       </div>
-      <div class="col-sm-8">{{numberOfPatients}}</div>
+      <div class="col-sm-8">{{test.numberOfCases}}</div>
     </div>
     <div class="row">
       <div class="col-sm-4">
         <h4><span>Mean Age and SD:</span></h4>
       </div>
-      <div class="col-sm-8">{{MeanAge}} -/+ {{MeanSD}}</div>
+      <div class="col-sm-8">{{test.meanAge}} -/+ {{test.meanAgeSTD}}</div>
+    </div>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4><span>Mean Height and SD:</span></h4>
+      </div>
+      <div class="col-sm-8">{{test.meanHeight}} -/+ {{test.meanHeightSTD}}</div>
     </div>
     <div class="row">
       <div class="col-sm-4">
         <h4><span>Gender:</span></h4>
       </div>
-      <div class="col-sm-8">Male:{{MaleNo}} / Female:{{FemaleNo}}</div>
+      <div class="col-sm-8">Male:{{test.genderMale}} / Female:{{test.genderFemale}}</div>
     </div>
   </div>
   <div class="card-footer"></div>

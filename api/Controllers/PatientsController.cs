@@ -71,7 +71,7 @@ namespace scriptie.Controllers
         public async Task<IActionResult> getCalculatedCas(int id, string value)
         {
             // Id = which calculation should be done, 1-FEV1, 2-TLC, 3-RV, 4-ERV, 5-IC, 6-VC
-            // if value is bv RV if id = 3
+            // if value is bv RV if id = 3 // should be changed to {age,height,etc}
 
             switch (id)
             {

@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { StatisticsSummary } from 'src/app/_models/statisticsSummary';
+import { StatisticsService } from 'src/app/_services/statistics.service';
 
 @Component({
   selector: 'app-descriptiveStatistics',
   templateUrl: './descriptiveStatistics.component.html',
-  styleUrls: ['./descriptiveStatistics.component.css']
+  styleUrls: ['./descriptiveStatistics.component.css'],
 })
 export class DescriptiveStatisticsComponent implements OnInit {
-  numberOfPatients=8;
-  MeanAge = 56;
-  MeanSD = 2;
-  MaleNo = 3;
-  FemaleNo = 5;
-  constructor() { }
+  test: StatisticsSummary;
+
+  constructor(private statis: StatisticsService) {}
 
   ngOnInit() {
+    this.getStatisticalSummary();
   }
 
+  getStatisticalSummary() {
+    this.statis.getSummary().subscribe((next) => { this.test = next; });
+  }
 }

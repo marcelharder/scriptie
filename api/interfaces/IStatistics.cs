@@ -21,7 +21,6 @@ namespace api.Interfaces
         Task<GLI> CalculateGLIERV(string value);
         Task<GLI> CalculateGLIIC(string value);
         Task<GLI> CalculateGLIVC(string value);
-       
-
+        List<scatterDataDTO> getScatterData();
     }
 }

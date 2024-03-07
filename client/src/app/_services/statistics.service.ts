@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { StatisticsSummary } from '../_models/statisticsSummary';
+import { scatterPoint } from '../_models/scatterPoint';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class StatisticsService {
 
   getSummary() {return this.http.get<StatisticsSummary>(this.baseUrl + "getStatisticalSummary");}
 
-
+  getScatter() {return this.http.get<scatterPoint[]>(this.baseUrl + "getScatter");}
 
 
 

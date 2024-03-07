@@ -19,5 +19,11 @@ namespace scriptie.Controllers
             var result = await _stat.getDescriptiveStatistics();
             return Ok(result);
         }
+        [HttpGet("api/getScatter")]
+        public async Task<IActionResult> getScatter()
+        {
+            var result = _stat.getScatterData();
+            return Ok(result);
+        }
     }
 }

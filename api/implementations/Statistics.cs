@@ -1,3 +1,4 @@
+using System.Windows.Markup;
 using api.data.dtos;
 
 namespace api.implementations;
@@ -281,42 +282,55 @@ public class Statistics : IStatistics
         stat.genderFemale = femaleCount;
         stat.genderMale = maleCount;
         stat.meanAge = getMean(ageCount);
-        stat.meanAgeSTD = getSTD(ageCount);
+        stat.meanAgeSTD = getSTD02(ageCount);
         stat.meanHeight = getMeanFloat(heightCount);
-        stat.meanHeightSTD = getSTDF(heightCount);
+        stat.meanHeightSTD = getSTD03(heightCount);
 
         return stat;
     }
 
     
-
-    private double getMeanFloat(List<float> heightCount)
-    {
-         return heightCount.Average();
-    }
-
-    private double getMean(List<double> ageCount)
-    {
-        return ageCount.Average();
-    }
-
-    private double getSTD(List<double> ageCount){
-        double average = ageCount.Average();
-        double sumOfDerivation = 0;
-        foreach(double value in ageCount){
-            sumOfDerivation += (value) * (value);
-        }
-        double sumOfDerivationAverage = sumOfDerivation / (ageCount.Count - 1);
-        return Math.Sqrt(sumOfDerivationAverage - (average * average));
-    }
-     private double getSTDF(List<float> heightCount){
-        double average = heightCount.Average();
-        double sumOfDerivation = 0;
-        foreach(float value in heightCount){
-            sumOfDerivation += (value) * (value);
-        }
-        double sumOfDerivationAverage = sumOfDerivation / (heightCount.Count - 1);
-        return Math.Sqrt(sumOfDerivationAverage - (average * average));
-    }
+    #region Calculations
+        
     
+    private double getMeanFloat(List<float> heightCount){ return heightCount.Average(); }
+    private double getMean(List<double> ageCount){return ageCount.Average(); }
+    public static double getSTD02(List<double> ageCount){
+       
+     var count = ageCount?.Count() ?? 0;
+     if (count < 1) return 0;
+     var avg = ageCount.Average();
+     var sum = ageCount.Sum(d => Math.Pow(d - avg, 2));
+     return Math.Sqrt(sum / count);
+
+    }
+    public static double getSTD03(List<float> ageCount){
+       
+     var count = ageCount?.Count() ?? 0;
+     if (count < 1) return 0;
+     var avg = ageCount.Average();
+     var sum = ageCount.Sum(d => Math.Pow(d - avg, 2));
+     return Math.Sqrt(sum / count);
+
+    }
+
+    public List<scatterDataDTO> getScatterData()
+    {
+        var list = new List<scatterDataDTO>();
+        var scatter = new scatterDataDTO();
+        Random rnd = new Random();
+        
+        for(int x = 0; x < 50 ; x ++){
+         
+          scatter = new scatterDataDTO();
+          scatter.x = rnd.Next(1, 25);
+          scatter.y = rnd.Next(1, 25);
+          list.Add(scatter);
+          
+        }
+        return list;
+    }
+
+
+    #endregion
 }

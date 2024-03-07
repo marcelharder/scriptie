@@ -1,5 +1,6 @@
 using System.Windows.Markup;
 using api.data.dtos;
+using scriptie.data.migrations;
 
 namespace api.implementations;
 
@@ -51,40 +52,27 @@ public class Statistics : IStatistics
 
     public async Task<CAS> CalculateCASFEV1(ingredientsCalculateCASDTO ing)
     {
-       /*  // find out if this record exists in the database
-       
-        if (selected != null)
-        {
-            // edit this cas record
-               selected.measured = ing.measured.ToString();
-               selected.predicted = "21";
-               selected.Perc_Predicted = "25";
-               selected.BDR_perc_changed = "23";
-               selected.LLN = "22";
-               selected.ULN = "234";
-               selected.zscore = "22";
-               _data.cas.Update(selected);
-               
-               
+        // get the correct cas
+        var result =  _data.Patients
+                       .Where(b => b.Id == ing.Id)
+                       .Include(b => b.CAS)
+                       .FirstOrDefault();
+       await Task.Run(() =>
+       {
+           result.CAS.measured = ing.measured.ToString();
+           result.CAS.predicted = getKnudsonCalculation(ing);
+           result.CAS.Perc_Predicted = "25";
+           result.CAS.BDR_perc_changed = "23";
+           result.CAS.LLN = "22";
+           result.CAS.ULN = "234";
+           result.CAS.zscore = "22";
+           // save back to the database
+           _data.Update(result);
+           _data.SaveChanges();
+       });
+        //   }
 
-        }
-        else
-        { */
-            var result = new CAS();
-            await Task.Run(() =>
-           {
-               result.CasId = ing.Id;
-               result.measured = ing.measured.ToString();
-               result.predicted = "21";
-               result.Perc_Predicted = "25";
-               result.BDR_perc_changed = "23";
-               result.LLN = "22";
-               result.ULN = "234";
-               result.zscore = "22";
-           });
-     //   }
-
-        return result;
+        return result.CAS;
     }
 
     public async Task<CAS> CalculateCASIC(string value)
@@ -189,7 +177,7 @@ public class Statistics : IStatistics
        {
            result.GliId = ing.Id;
            result.measured = ing.measured.ToString();
-           result.predicted = "81";
+           result.predicted = this.getGliCalculation_2012(ing);
            result.Perc_Predicted = "85";
            result.BDR_perc_changed = "83";
            result.LLN = "82";
@@ -355,6 +343,73 @@ public class Statistics : IStatistics
         return list;
     }
 
+    public string getGliCalculation_2012(ingredientsCalculateCASDTO ing)
+    {
+        var help = "gli2012";
+        var height = ing.Height;
+        var age = ing.Age;
+        var gender = ing.Gender;
+        var fev1 = ing.measured;
+
+
+
+
+        return help;
+    }
+     public string getGliCalculation_2023(ingredientsCalculateCASDTO ing)
+    {
+        var help = "gli2023";
+        var height = ing.Height;
+        var age = ing.Age;
+        var gender = ing.Gender;
+        var fev1 = ing.measured;
+
+
+
+
+        return help;
+    }
+       public string getKnudsonCalculation(ingredientsCalculateCASDTO ing)
+    {
+        var help = "k";
+        var height = ing.Height;
+        var age = ing.Age;
+        var gender = ing.Gender;
+        var fev1 = ing.measured;
+
+        
+
+
+        return help;
+    }
+
+       public string getHankinsonCalculation(ingredientsCalculateCASDTO ing)
+    {
+        var help = "h";
+        var height = ing.Height;
+        var age = ing.Age;
+        var gender = ing.Gender;
+        var fev1 = ing.measured;
+
+        
+
+
+        return help;
+    }
+    #endregion
+
+
+
+
+    #region Formula's
+
+
+
+
+
+
+
 
     #endregion
 }
+

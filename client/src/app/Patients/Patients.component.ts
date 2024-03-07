@@ -20,7 +20,8 @@ export class PatientsComponent implements OnInit {
     age: 0,
     gender: 0,
     race: 0,
-    measured: 0
+    measured: 0,
+    Id: 0
   };
   cas_title = '';
   gli_title = '';
@@ -70,7 +71,7 @@ export class PatientsComponent implements OnInit {
       case 1:
         this.gli_title = 'FEV1';
         this.cas_title = 'FEV1';
-        this.ing.Id = this.selectedPatient.id;
+        this.ing.Id = this.selectedPatient.cas.casId;
         this.ing.measured = +this.selectedPatient.feV1;
         this.ing.age = this.selectedPatient.age;
         this.ing.height = this.selectedPatient.height;

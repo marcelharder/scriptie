@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CAS } from '../_models/cas';
 import { GLI } from '../_models/gli';
+import { ingredientsCalc } from '../_models/ingredientsCalc';
 
 @Injectable({
   providedIn: 'root'
@@ -20,9 +21,9 @@ export class PatientService {
     
   addPatient(){return this.http.post<Patient>(this.baseUrl + "AddPatient", null)}
 
-  calculateCas(id: number, value: string) {  return this.http.get<CAS>(this.baseUrl + "calculateCAS/" + id + "/" + value) }
+  calculateCas(id: number, value: ingredientsCalc) {  return this.http.post<CAS>(this.baseUrl + "calculateCAS/" + id, value) }
 
-  calculateGli(id: number, value: string) {  return this.http.get<GLI>(this.baseUrl + "calculateGli/" + id + "/" + value) }
+  calculateGli(id: number, value: ingredientsCalc) {  return this.http.post<GLI>(this.baseUrl + "calculateGli/" + id, value) }
 
 
 

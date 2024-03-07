@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { dropItem } from '../_models/dropItem';
 import { CAS } from '../_models/cas';
 import { GLI } from '../_models/gli';
+import { ingredientsCalc } from '../_models/ingredientsCalc';
 
 @Component({
   selector: 'app-Patients',
@@ -14,10 +15,17 @@ import { GLI } from '../_models/gli';
 })
 export class PatientsComponent implements OnInit {
   genderOptions: Array<dropItem> = [];
+  ing: ingredientsCalc = {
+    height: 0,
+    age: 0,
+    gender: 0,
+    race: 0,
+    measured: 0
+  };
   cas_title = '';
   gli_title = '';
-  casId =0;
-  gliId =0;
+  casId = 0;
+  gliId = 0;
   show = 0;
   listOfPatients: Array<Patient> = [];
   help: any;
@@ -35,52 +43,48 @@ export class PatientsComponent implements OnInit {
     this.genderOptions.push({ value: 0, description: 'Choose' });
     this.genderOptions.push({ value: 1, description: 'Male' });
     this.genderOptions.push({ value: 2, description: 'Female' });
-    
 
     this.show = 0;
     this.help = this.route.snapshot.data;
     this.listOfPatients = this.help.patients;
-   
-
   }
   clearTheResults() {
-    
-      this.selectedPatient.cas.bdR_perc_changed = 0;
-      this.selectedPatient.cas.perc_Predicted = 0;
-      this.selectedPatient.cas.measured = 0;
-      this.selectedPatient.cas.predicted = 0;
-      this.selectedPatient.cas.uln = 0;
-      this.selectedPatient.cas.zscore = 0;
-      this.selectedPatient.cas.lln = 0;
+    this.selectedPatient.cas.bdR_perc_changed = 0;
+    this.selectedPatient.cas.perc_Predicted = 0;
+    this.selectedPatient.cas.measured = 0;
+    this.selectedPatient.cas.predicted = 0;
+    this.selectedPatient.cas.uln = 0;
+    this.selectedPatient.cas.zscore = 0;
+    this.selectedPatient.cas.lln = 0;
 
-      this.selectedPatient.gli.bdR_perc_changed = 0;
-      this.selectedPatient.gli.perc_Predicted = 0;
-      this.selectedPatient.gli.measured = 0;
-      this.selectedPatient.gli.predicted = 0;
-      this.selectedPatient.gli.uln = 0;
-      this.selectedPatient.gli.zscore = 0;
-      this.selectedPatient.gli.lln = 0;
-     
-
-   
+    this.selectedPatient.gli.bdR_perc_changed = 0;
+    this.selectedPatient.gli.perc_Predicted = 0;
+    this.selectedPatient.gli.measured = 0;
+    this.selectedPatient.gli.predicted = 0;
+    this.selectedPatient.gli.uln = 0;
+    this.selectedPatient.gli.zscore = 0;
+    this.selectedPatient.gli.lln = 0;
   }
   calcButton(id: number) {
     switch (id) {
       case 1:
         this.gli_title = 'FEV1';
         this.cas_title = 'FEV1';
-        
-        if (
-          this.selectedPatient.feV1 === "" || this.selectedPatient.feV1 === null 
-        ) {
-          this.toast.error('FEV1 cannot be empty ...');
+        this.ing.Id = this.selectedPatient.id;
+        this.ing.measured = +this.selectedPatient.feV1;
+        this.ing.age = this.selectedPatient.age;
+        this.ing.height = this.selectedPatient.height;
+        this.ing.gender = this.transFormGender(this.selectedPatient.gender);
+
+        if (!this.checkIngredientComplete(this.ing)) {
+          this.toast.error('check what you upload ...');
           this.clearTheResults();
         } else {
-          this.calculateGli(id, this.selectedPatient.feV1);
-          this.calculateCas(id, this.selectedPatient.feV1);
+          this.calculateGli(id, this.ing);
+          this.calculateCas(id, this.ing);
         }
         break;
-      case 2:
+      /*    case 2:
         this.gli_title = 'TLC';
         this.cas_title = 'TLC';
         if (
@@ -150,17 +154,18 @@ export class PatientsComponent implements OnInit {
         }
 
         break;
+   */
     }
   }
 
-  calculateGli(id: number, value: string) {
-    this.p.calculateGli(id,value).subscribe((next) => {
+  calculateGli(id: number, value: ingredientsCalc) {
+    this.p.calculateGli(id, value).subscribe((next) => {
       this.selectedPatient.gli = next;
     });
   }
 
-  calculateCas(id: number, value: string) {
-    this.p.calculateCas(id,value).subscribe((next) => {
+  calculateCas(id: number, value: ingredientsCalc) {
+    this.p.calculateCas(id, value).subscribe((next) => {
       this.selectedPatient.cas = next;
     });
   }
@@ -180,36 +185,35 @@ export class PatientsComponent implements OnInit {
   }
 
   update() {
-    var newCas:CAS = {
+    var newCas: CAS = {
       casId: 0,
-      PatientId:0,
+      PatientId: 0,
       measured: 0,
       predicted: 0,
       zscore: 0,
       lln: 0,
       uln: 0,
       perc_Predicted: 0,
-      bdR_perc_changed: 0
+      bdR_perc_changed: 0,
     };
-    var newGli:GLI = {
+    var newGli: GLI = {
       gliId: 0,
-      PatientId:0,
+      PatientId: 0,
       measured: 0,
       predicted: 0,
       zscore: 0,
       lln: 0,
       uln: 0,
       perc_Predicted: 0,
-      bdR_perc_changed: 0
+      bdR_perc_changed: 0,
     };
-// restore the CAS and GLI first
+    // restore the CAS and GLI first
     newGli.PatientId = this.selectedPatient.id;
     newCas.PatientId = this.selectedPatient.id;
     newCas.casId = this.casId;
     newGli.gliId = this.gliId;
     this.selectedPatient.cas = newCas;
     this.selectedPatient.gli = newGli;
-
 
     this.p.updatePatient(this.selectedPatient).subscribe((next) => {
       // get the list again
@@ -238,13 +242,34 @@ export class PatientsComponent implements OnInit {
       this.selectedPatient = next;
       this.casId = this.selectedPatient.cas.casId;
       this.gliId = this.selectedPatient.gli.gliId;
-     
+
       this.clearTheResults();
 
-      if (this.selectedPatient.gender === null || this.selectedPatient.gender === "") {
-        this.selectedPatient.gender = "Choose";
+      if (
+        this.selectedPatient.gender === null ||
+        this.selectedPatient.gender === ''
+      ) {
+        this.selectedPatient.gender = 'Choose';
       }
       this.show = 1;
     });
+  }
+
+  checkIngredientComplete(ing: ingredientsCalc): boolean {
+    var help = true;
+
+    if (ing.age === 0 || ing.age === null) help = false;
+    if (ing.measured === 0.0 || ing.measured === null) help = false;
+    if (ing.height === 0 || ing.height === null) help = false;
+    if (ing.gender === 0 || ing.gender === null) help = false;
+
+    return help;
+  }
+  transFormGender(test: string):number {
+    var help = 0;
+    if(test === "Male")help = 1;
+    if(test === "Female")help = 2;
+
+    return help;
   }
 }

@@ -61,7 +61,7 @@
               <div class="col-sm-6"><label>gender</label></div>
               <div class="col-sm-6"> 
                 <select [(ngModel)]="selectedPatient.gender" name="name" class="form-control">
-                  <option *ngFor="let an of genderOptions" [value]=an.description>{{ an.description }}
+                  <option *ngFor="let an of genderOptions" [value]=an.value>{{ an.description }}
                   </option>
               </select></div>
             </div>

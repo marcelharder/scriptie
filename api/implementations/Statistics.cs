@@ -49,21 +49,40 @@ public class Statistics : IStatistics
         return result;
     }
 
-    public async Task<CAS> CalculateCASFEV1(string value)
+    public async Task<CAS> CalculateCASFEV1(ingredientsCalculateCASDTO ing)
     {
-        var result = new CAS();
-        await Task.Run(() =>
-       {
-           result.predicted = "21";
-           result.Perc_Predicted = "25";
-           result.BDR_perc_changed = "23";
-           result.LLN = "22";
-           result.ULN = "234";
-           result.zscore = "22";
-           result.predicted = "29"; result.measured = value;
+       /*  // find out if this record exists in the database
+       
+        if (selected != null)
+        {
+            // edit this cas record
+               selected.measured = ing.measured.ToString();
+               selected.predicted = "21";
+               selected.Perc_Predicted = "25";
+               selected.BDR_perc_changed = "23";
+               selected.LLN = "22";
+               selected.ULN = "234";
+               selected.zscore = "22";
+               _data.cas.Update(selected);
+               
+               
 
-
-       });
+        }
+        else
+        { */
+            var result = new CAS();
+            await Task.Run(() =>
+           {
+               result.CasId = ing.Id;
+               result.measured = ing.measured.ToString();
+               result.predicted = "21";
+               result.Perc_Predicted = "25";
+               result.BDR_perc_changed = "23";
+               result.LLN = "22";
+               result.ULN = "234";
+               result.zscore = "22";
+           });
+     //   }
 
         return result;
     }
@@ -163,18 +182,19 @@ public class Statistics : IStatistics
         return result;
     }
 
-    public async Task<GLI> CalculateGLIFEV1(string value)
+    public async Task<GLI> CalculateGLIFEV1(ingredientsCalculateCASDTO ing)
     {
         var result = new GLI();
         await Task.Run(() =>
        {
+           result.GliId = ing.Id;
+           result.measured = ing.measured.ToString();
            result.predicted = "81";
            result.Perc_Predicted = "85";
            result.BDR_perc_changed = "83";
            result.LLN = "82";
            result.ULN = "834";
            result.zscore = "82";
-           result.predicted = "89"; result.measured = value;
 
 
        });
@@ -267,13 +287,14 @@ public class Statistics : IStatistics
         var ageCount = new List<double>();
         // get list of patients
         var list = await _data.Patients.ToListAsync();
-        foreach(Patient p in list){
-        total = total + 1;
-        if(p.gender == "Male"){maleCount ++;}
-        if(p.gender == "Female"){femaleCount ++;}
-        heightCount.Add(p.height);
-        ageCount.Add(p.age);
-        
+        foreach (Patient p in list)
+        {
+            total = total + 1;
+            if (p.gender == "Male") { maleCount++; }
+            if (p.gender == "Female") { femaleCount++; }
+            heightCount.Add(p.height);
+            ageCount.Add(p.age);
+
         }
         var stat = new StatisticalSummaryForReturnDTO();
 
@@ -289,28 +310,30 @@ public class Statistics : IStatistics
         return stat;
     }
 
-    
+
     #region Calculations
-        
-    
-    private double getMeanFloat(List<float> heightCount){ return heightCount.Average(); }
-    private double getMean(List<double> ageCount){return ageCount.Average(); }
-    public static double getSTD02(List<double> ageCount){
-       
-     var count = ageCount?.Count() ?? 0;
-     if (count < 1) return 0;
-     var avg = ageCount.Average();
-     var sum = ageCount.Sum(d => Math.Pow(d - avg, 2));
-     return Math.Sqrt(sum / count);
+
+
+    private double getMeanFloat(List<float> heightCount) { return heightCount.Average(); }
+    private double getMean(List<double> ageCount) { return ageCount.Average(); }
+    public static double getSTD02(List<double> ageCount)
+    {
+
+        var count = ageCount?.Count() ?? 0;
+        if (count < 1) return 0;
+        var avg = ageCount.Average();
+        var sum = ageCount.Sum(d => Math.Pow(d - avg, 2));
+        return Math.Sqrt(sum / count);
 
     }
-    public static double getSTD03(List<float> ageCount){
-       
-     var count = ageCount?.Count() ?? 0;
-     if (count < 1) return 0;
-     var avg = ageCount.Average();
-     var sum = ageCount.Sum(d => Math.Pow(d - avg, 2));
-     return Math.Sqrt(sum / count);
+    public static double getSTD03(List<float> ageCount)
+    {
+
+        var count = ageCount?.Count() ?? 0;
+        if (count < 1) return 0;
+        var avg = ageCount.Average();
+        var sum = ageCount.Sum(d => Math.Pow(d - avg, 2));
+        return Math.Sqrt(sum / count);
 
     }
 
@@ -319,14 +342,15 @@ public class Statistics : IStatistics
         var list = new List<scatterDataDTO>();
         var scatter = new scatterDataDTO();
         Random rnd = new Random();
-        
-        for(int x = 0; x < 50 ; x ++){
-         
-          scatter = new scatterDataDTO();
-          scatter.x = rnd.Next(1, 25);
-          scatter.y = rnd.Next(1, 25);
-          list.Add(scatter);
-          
+
+        for (int x = 0; x < 50; x++)
+        {
+
+            scatter = new scatterDataDTO();
+            scatter.x = rnd.Next(1, 25);
+            scatter.y = rnd.Next(1, 25);
+            list.Add(scatter);
+
         }
         return list;
     }

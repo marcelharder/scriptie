@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Design;
 using System.Data.Common;
 using System.Threading.Tasks;
+using api.data.dtos;
 using api.entities;
 using api.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -67,39 +68,43 @@ namespace scriptie.Controllers
             if (await _patient.SaveAll()) { return Ok(); } else { return BadRequest(""); }
         }
 
-        [HttpGet("api/calculateCas/{id}/{value}")]
-        public async Task<IActionResult> getCalculatedCas(int id, string value)
+        
+
+        [HttpPost("api/calculateCas/{id}")]
+        public async Task<IActionResult> getCalculatedCas(int id, [FromBody] ingredientsCalculateCASDTO ing)
         {
             // Id = which calculation should be done, 1-FEV1, 2-TLC, 3-RV, 4-ERV, 5-IC, 6-VC
             // if value is bv RV if id = 3 // should be changed to {age,height,etc}
 
+        
+
             switch (id)
             {
-                case 1: return Ok(await _stat.CalculateCASFEV1(value));
-                case 2: return Ok(await _stat.CalculateCASTLC(value));
+                case 1: return Ok(await _stat.CalculateCASFEV1(ing));
+               /*  case 2: return Ok(await _stat.CalculateCASTLC(value));
                 case 3: return Ok(await _stat.CalculateCASRV(value));
                 case 4: return Ok(await _stat.CalculateCASRV(value));
                 case 5: return Ok(await _stat.CalculateCASIC(value));
                 case 6: return Ok(await _stat.CalculateCASVC(value));
-
+ */
             }
             return BadRequest("Something went oops");
 
         }
-        [HttpGet("api/calculateGli/{id}/{value}")]
-        public async Task<IActionResult> getCalculatedGli(int id, string value)
+        [HttpPost("api/calculateGli/{id}")]
+        public async Task<IActionResult> getCalculatedGli(int id, [FromBody] ingredientsCalculateCASDTO ing)
         {
             // Id = which calculation should be done, 1-FEV1, 2-TLC, 3-RV, 4-ERV, 5-IC, 6-VC
             // if value is bv RV if id = 3
 
             switch (id)
             {
-                case 1: return Ok(await _stat.CalculateGLIFEV1(value));
-                case 2: return Ok(await _stat.CalculateGLITLC(value));
+                case 1: return Ok(await _stat.CalculateGLIFEV1(ing));
+               /*  case 2: return Ok(await _stat.CalculateGLITLC(value));
                 case 3: return Ok(await _stat.CalculateGLIRV(value));
                 case 4: return Ok(await _stat.CalculateGLIRV(value));
                 case 5: return Ok(await _stat.CalculateGLIIC(value));
-                case 6: return Ok(await _stat.CalculateGLIVC(value));
+                case 6: return Ok(await _stat.CalculateGLIVC(value)); */
 
             }
             return BadRequest("Something went oops");

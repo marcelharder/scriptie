@@ -3,6 +3,7 @@ namespace api.entities
     public class Patient
     {
         public int Id { get; set; }
+        public DateTime dob {get; set;}
         public float height { get; set; }
         public float weight { get; set; }
         public float age { get; set; }

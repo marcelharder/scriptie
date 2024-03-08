@@ -63,7 +63,17 @@ namespace scriptie.Controllers
         [HttpPut("api/UpdatePatient")]
         public async Task<IActionResult> updatePatient([FromBody] Patient pat)
         {
+            // calculateAge from dob
+            DateTime birthDate = pat.dob;
+            DateTime now = DateTime.UtcNow;
+
+            var millisecondsLived = now.Ticks - birthDate.Ticks;
+            var help = millisecondsLived / (1000 * 60 * 60 * 24 * 365.25) / 10000;
+            pat.age = (float) help;
+            pat.age = (float) Math.Round(pat.age,1,MidpointRounding.AwayFromZero);
             
+
+
             _patient.Update(pat);
             if (await _patient.SaveAll()) { return Ok(); } else { return BadRequest(""); }
         }

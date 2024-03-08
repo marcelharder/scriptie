@@ -57,14 +57,15 @@
               <div class="col-sm-6"><label>date of birth</label></div>
               <div class="col-sm-6">
                 <div class="row">
-                  <div class="col-sm-8"><input type=text 
+                  <div class="col-sm-8"><input 
+                    type=text 
                     class="form-control"
                     #dp="bsDatepicker"
-                    [(ngModel)]="dob"
+                    [(ngModel)]="selectedPatient.dob"
                     name="datepickage"
                     bsDatepicker
                     [bsConfig]="{dateInputFormat: 'YYYY/MM/DD'}"></div>
-                  <div class="col-sm-2"><input type=text class=form-control [(ngModel)]="selectedPatient.age" name="3678" readonly></div>
+                  <div class="col-sm-2"><label class="mt-2" *ngIf="selectedPatient.age != 0">{{selectedPatient.age}}yrs.</label></div>
                 </div>
                 
                 </div>

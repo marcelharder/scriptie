@@ -6,6 +6,7 @@ export interface Patient {
     height: number;
     weight: number;
     age: number;
+    dob: Date;
     gender: number;
     feV1: string;
     tlc: string;

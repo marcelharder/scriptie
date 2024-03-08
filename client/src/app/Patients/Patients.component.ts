@@ -16,6 +16,7 @@ import { ingredientsCalc } from '../_models/ingredientsCalc';
 export class PatientsComponent implements OnInit {
   genderOptions: Array<dropItem> = [];
   dob: Date;
+  age: number;
   ing: ingredientsCalc = {
     height: 0,
     age: 0,
@@ -187,7 +188,6 @@ export class PatientsComponent implements OnInit {
   }
 
   update() {
-    this.selectedPatient.age = this.calculateAge(this.dob);
     var newCas: CAS = {
       casId: 0,
       PatientId: 0,
@@ -219,7 +219,7 @@ export class PatientsComponent implements OnInit {
     this.selectedPatient.gli = newGli;
 
 
-
+    
     this.p.updatePatient(this.selectedPatient).subscribe((next) => {
       // get the list again
       this.p.getListOfPatients().subscribe((next) => { this.listOfPatients = next; this.show = 0; });
@@ -239,7 +239,6 @@ export class PatientsComponent implements OnInit {
       this.selectedPatient = next;
       this.casId = this.selectedPatient.cas.casId;
       this.gliId = this.selectedPatient.gli.gliId;
-
       this.clearTheResults();
 
       if (
@@ -264,14 +263,5 @@ export class PatientsComponent implements OnInit {
   }
  
 
-  calculateAge(test :Date):number{
-    var help = 0;
-    const birthDate = test;
-    const currentDate = new Date();
-    const diffInMilliseconds = currentDate.getTime() - birthDate.getTime();
-    const ageInYears = diffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
-    help = parseFloat(ageInYears.toFixed(1));
-    debugger;
-    return help;
-  }
+ 
 }

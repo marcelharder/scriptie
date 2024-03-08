@@ -15,6 +15,7 @@ import { ingredientsCalc } from '../_models/ingredientsCalc';
 })
 export class PatientsComponent implements OnInit {
   genderOptions: Array<dropItem> = [];
+  dob: Date;
   ing: ingredientsCalc = {
     height: 0,
     age: 0,
@@ -75,7 +76,7 @@ export class PatientsComponent implements OnInit {
         this.ing.measured = +this.selectedPatient.feV1;
         this.ing.age = this.selectedPatient.age;
         this.ing.height = this.selectedPatient.height;
-        this.ing.gender = this.transFormGender(this.selectedPatient.gender);
+        this.ing.gender = this.selectedPatient.gender;
 
         if (!this.checkIngredientComplete(this.ing)) {
           this.toast.error('check what you upload ...');
@@ -186,6 +187,7 @@ export class PatientsComponent implements OnInit {
   }
 
   update() {
+    this.selectedPatient.age = this.calculateAge(this.dob);
     var newCas: CAS = {
       casId: 0,
       PatientId: 0,
@@ -216,17 +218,11 @@ export class PatientsComponent implements OnInit {
     this.selectedPatient.cas = newCas;
     this.selectedPatient.gli = newGli;
 
+
+
     this.p.updatePatient(this.selectedPatient).subscribe((next) => {
       // get the list again
-      this.p.getListOfPatients().subscribe(
-        (next) => {
-          this.listOfPatients = next;
-        },
-        (error) => {},
-        () => {
-          this.show = 0;
-        }
-      );
+      this.p.getListOfPatients().subscribe((next) => { this.listOfPatients = next; this.show = 0; });
     });
   }
 
@@ -248,9 +244,9 @@ export class PatientsComponent implements OnInit {
 
       if (
         this.selectedPatient.gender === null ||
-        this.selectedPatient.gender === ''
+        this.selectedPatient.gender === 0
       ) {
-        this.selectedPatient.gender = 'Choose';
+        this.selectedPatient.gender = 0;
       }
       this.show = 1;
     });
@@ -266,11 +262,16 @@ export class PatientsComponent implements OnInit {
 
     return help;
   }
-  transFormGender(test: string):number {
-    var help = 0;
-    if(test === "Male")help = 1;
-    if(test === "Female")help = 2;
+ 
 
+  calculateAge(test :Date):number{
+    var help = 0;
+    const birthDate = test;
+    const currentDate = new Date();
+    const diffInMilliseconds = currentDate.getTime() - birthDate.getTime();
+    const ageInYears = diffInMilliseconds / (1000 * 60 * 60 * 24 * 365.25);
+    help = parseFloat(ageInYears.toFixed(1));
+    debugger;
     return help;
   }
 }

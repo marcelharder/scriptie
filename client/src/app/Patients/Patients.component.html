@@ -54,8 +54,20 @@
               <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.height" name="3"></div>
             </div>
             <div class="row mb-2">
-              <div class="col-sm-6"><label>age</label></div>
-              <div class="col-sm-6"><input type=text class=form-control [(ngModel)]="selectedPatient.age" name="4"></div>
+              <div class="col-sm-6"><label>date of birth</label></div>
+              <div class="col-sm-6">
+                <div class="row">
+                  <div class="col-sm-8"><input type=text 
+                    class="form-control"
+                    #dp="bsDatepicker"
+                    [(ngModel)]="dob"
+                    name="datepickage"
+                    bsDatepicker
+                    [bsConfig]="{dateInputFormat: 'YYYY/MM/DD'}"></div>
+                  <div class="col-sm-2"><input type=text class=form-control [(ngModel)]="selectedPatient.age" name="3678" readonly></div>
+                </div>
+                
+                </div>
             </div>
             <div class="row mb-2">
               <div class="col-sm-6"><label>gender</label></div>

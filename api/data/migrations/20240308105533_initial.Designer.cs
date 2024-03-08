@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.data;
 
@@ -10,9 +11,11 @@ using api.data;
 namespace scriptie.data.migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240308105533_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.13");
@@ -167,8 +170,8 @@ namespace scriptie.data.migrations
                     b.Property<float>("age")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("gender")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("gender")
+                        .HasColumnType("TEXT");
 
                     b.Property<float>("height")
                         .HasColumnType("REAL");

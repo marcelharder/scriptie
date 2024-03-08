@@ -23,7 +23,7 @@ namespace scriptie.Controllers
         public async Task<IActionResult> addPatient()
         {
             var newPatient = new Patient();
-            newPatient.gender = "Choose";
+            newPatient.gender = 0;
             _patient.Add(newPatient);
 
             if (await _patient.SaveAll())

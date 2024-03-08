@@ -6,7 +6,7 @@ export interface Patient {
     height: number;
     weight: number;
     age: number;
-    gender: string;
+    gender: number;
     feV1: string;
     tlc: string;
     rv: string;

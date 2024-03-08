@@ -278,8 +278,8 @@ public class Statistics : IStatistics
         foreach (Patient p in list)
         {
             total = total + 1;
-            if (p.gender == "Male") { maleCount++; }
-            if (p.gender == "Female") { femaleCount++; }
+            if (p.gender == 1) { maleCount++; }
+            if (p.gender == 2) { femaleCount++; }
             heightCount.Add(p.height);
             ageCount.Add(p.age);
 

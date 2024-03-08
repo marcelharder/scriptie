@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
-
+import { BsDatepickerModule} from 'ngx-bootstrap/datepicker';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -43,6 +44,8 @@ export function tokenGet() { return localStorage.getItem('token'); }
       StatisticsThreeComponent
    ],
   imports: [
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
     FormsModule,
     TabsModule.forRoot(),
     BrowserModule,

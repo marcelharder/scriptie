@@ -5,8 +5,8 @@ namespace api.entities
         public int Id { get; set; }
         public float height { get; set; }
         public float weight { get; set; }
-        public int age { get; set; }
-        public string gender { get; set; }
+        public float age { get; set; }
+        public int gender { get; set; }
         public string FEV1 { get; set; }
         public string TLC { get; set; }
         public string RV { get; set; }
